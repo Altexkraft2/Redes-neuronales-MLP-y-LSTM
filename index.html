@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe sobre Redes Neuronales MLP y LSTM</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* Contenedor principal estilo Word */
+        .container {
+            max-width: 210mm; /* Tamaño A4 */
+            min-height: 297mm;
+            margin: 20px auto;
+            padding: 25mm;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        /* Encabezados */
+        h1 {
+            font-size: 18pt;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 14pt;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            font-size: 12pt;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* Párrafos y texto */
+        p {
+            font-size: 11pt;
+            text-align: justify;
+            margin-bottom: 12px;
+        }
+
+        /* Listas */
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        li {
+            font-size: 11pt;
+            margin-bottom: 8px;
+        }
+
+        /* Índice */
+        .indice {
+            margin: 30px 0;
+            padding: 15px;
+            border: 1px solid #000;
+        }
+
+        .indice h2 {
+            margin-top: 0;
+        }
+
+        .indice ul {
+            list-style-type: decimal;
+        }
+
+        .indice li {
+            margin-bottom: 10px;
+        }
+
+        .indice a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .indice a:hover {
+            text-decoration: underline;
+        }
+
+        /* Secciones */
+        .seccion {
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+        }
+
+        /* Fórmulas matemáticas */
+        .formula {
+            text-align: center;
+            margin: 15px 0;
+            font-style: italic;
+        }
+
+        /* Notas al pie */
+        .nota {
+            font-size: 10pt;
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        /* Saltos de página */
+        .salto-pagina {
+            page-break-before: always;
+        }
+
+        /* Encabezado de página */
+        .encabezado {
+            position: running(header);
+            text-align: center;
+            font-size: 10pt;
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        /* Números de página */
+        @page {
+            margin: 25mm;
+            @top-center {
+                content: element(header);
+            }
+            @bottom-center {
+                content: counter(page);
+                font-size: 10pt;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+            <P>Jesus peña</P>
+    <p>31495853</p>
+
+            <h1>INTELIGENCIA ARTIFICIAL</h1>
+
+
+        <h1>INFORME:<br>REDES NEURONALES MLP Y LSTM</h1>
+
+        <div class="indice">
+            <h2>ÍNDICE</h2>
+            <ul>
+                <li><a href="#introduccion">1. Introducción</a></li>
+                <li><a href="#mlp">2. Redes Neuronales MLP (Perceptrón Multicapa)</a>
+                    <ul>
+                        <li><a href="#concepto-mlp">2.1. Concepto Fundamental</a></li>
+                        <li><a href="#arquitectura-mlp">2.2. Arquitectura Detallada</a></li>
+                        <li><a href="#aprendizaje-mlp">2.3. Proceso de Aprendizaje</a></li>
+                        <li><a href="#aplicaciones-mlp">2.4. Aplicaciones y Limitaciones</a></li>
+                    </ul>
+                </li>
+                <li><a href="#lstm">3. Redes Neuronales LSTM (Long Short-Term Memory)</a>
+                    <ul>
+                        <li><a href="#concepto-lstm">3.1. Concepto Fundamental</a></li>
+                        <li><a href="#arquitectura-lstm">3.2. Arquitectura Detallada</a></li>
+                        <li><a href="#aprendizaje-lstm">3.3. Proceso de Aprendizaje</a></li>
+                        <li><a href="#aplicaciones-lstm">3.4. Aplicaciones y Variantes</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="seccion" id="introduccion">
+            <h2>1. INTRODUCCIÓN</h2>
+            <p>El presente documento técnico tiene como objetivo proporcionar un análisis exhaustivo y detallado de dos arquitecturas fundamentales en el campo del aprendizaje profundo: las Redes Neuronales MLP (Multilayer Perceptron) y las Redes Neuronales LSTM (Long Short-Term Memory). Cada arquitectura será examinada de manera independiente, profundizando en sus conceptos teóricos, estructuras arquitectónicas, mecanismos de aprendizaje y aplicaciones prácticas.</p>
+            
+            <p>Este informe está estructurado para ofrecer una comprensión completa de ambas arquitecturas, presentando los conceptos de manera clara y accesible, manteniendo al mismo tiempo el rigor técnico necesario para una comprensión profunda de estos modelos de aprendizaje automático.</p>
+        </div>
+
+        <div class="salto-pagina"></div>
+
+        <div class="seccion" id="mlp">
+            <h2>2. REDES NEURONALES MLP (PERCEPTRÓN MULTICAPA)</h2>
+
+            <div id="concepto-mlp">
+                <h3>2.1. CONCEPTO FUNDAMENTAL</h3>
+                <p>Las Redes Neuronales MLP (Multilayer Perceptron) representan una arquitectura fundamental en el ámbito del aprendizaje automático y constituyen la base de las redes neuronales feedforward artificiales. Un MLP es una clase de red neuronal artificial que se organiza en múltiples capas de nodos en una estructura dirigida, donde cada capa está completamente conectada con la siguiente. Esta arquitectura se caracteriza por su capacidad para aprender relaciones no lineales complejas entre entradas y salidas, lo que las hace extremadamente versátiles para una amplia gama de aplicaciones de machine learning.</p>
+                
+                <p>La estructura básica de un MLP comprende tres tipos de capas: una capa de entrada que recibe los datos externos, una o más capas ocultas que procesan la información internamente, y una capa de salida que produce el resultado final. La denominación "perceptrón multicapa" proviene históricamente del perceptrón simple desarrollado por Frank Rosenblatt en 1958, pero con la adición crucial de múltiples capas que permiten resolver problemas no linealmente separables, una limitación fundamental del perceptrón original que fue identificada por Minsky y Papert en 1969.</p>
+            </div>
+
+            <div id="arquitectura-mlp">
+                <h3>2.2. ARQUITECTURA DETALLADA</h3>
+                <p>La arquitectura de un MLP se compone de unidades de procesamiento llamadas neuronas artificiales, que se organizan en capas secuenciales. Cada neurona en una capa está conectada a todas las neuronas de la capa siguiente mediante conexiones ponderadas, pero no existen conexiones entre neuronas de la misma capa. Matemáticamente, la operación en cada neurona puede describirse como una combinación lineal de las entradas seguida de una transformación no lineal:</p>
+                
+                <div class="formula">y = f(∑(w_i * x_i) + b)</div>
+                
+                <p>donde w_i son los pesos, x_i son las entradas, b es el sesgo y f es la función de activación.</p>
+                
+                <p>Las funciones de activación juegan un papel crítico en los MLP, ya que introducen no linealidades que permiten a la red aprender representaciones complejas. Entre las funciones de activación más comunes se encuentran:</p>
+                
+                <ul>
+                    <li><strong>Función Sigmoide:</strong> σ(x) = 1/(1+e^(-x)) - produce valores entre 0 y 1</li>
+                    <li><strong>Tangente Hiperbólica:</strong> tanh(x) = (e^x - e^(-x))/(e^x + e^(-x)) - genera valores entre -1 y 1</li>
+                    <li><strong>ReLU (Rectified Linear Unit):</strong> f(x) = max(0, x) - ha ganado popularidad reciente debido a su eficiencia computacional</li>
+                </ul>
+                
+                <p>La función ReLU es particularmente importante en redes profundas debido a su capacidad para mitigar el problema del gradiente vanishing.</p>
+            </div>
+
+            <div id="aprendizaje-mlp">
+                <h3>2.3. PROCESO DE APRENDIZAJE</h3>
+                <p>El aprendizaje en los MLP se realiza típicamente mediante el algoritmo de retropropagación (backpropagation), que es una aplicación eficiente de la regla de la cadena para calcular gradientes en redes neuronales. Este proceso implica dos fases principales:</p>
+                
+                <ul>
+                    <li><strong>Propagación hacia adelante (forward pass):</strong> Los datos de entrada se transmiten a través de la red, capa por capa, hasta generar una salida. Esta salida se compara con el valor objetivo utilizando una función de pérdida.</li>
+                    <li><strong>Propagación hacia atrás (backward pass):</strong> Los gradientes de la función de pérdida con respecto a cada parámetro de la red se calculan comenzando desde la capa de salida y moviéndose hacia atrás hasta la capa de entrada.</li>
+                </ul>
+                
+                <p>La función de pérdida utilizada depende de la naturaleza del problema:</p>
+                
+                <ul>
+                    <li><strong>Error cuadrático medio:</strong> Para problemas de regresión</li>
+                    <li><strong>Entropía cruzada:</strong> Para problemas de clasificación</li>
+                </ul>
+                
+                <p>Durante la retropropagación, los gradientes indican cómo deben ajustarse los pesos para reducir el error. La actualización real de los pesos se realiza utilizando algoritmos de optimización como:</p>
+                
+                <ul>
+                    <li>Descenso de gradiente estocástico (SGD)</li>
+                    <li>Adam</li>
+                    <li>RMSprop</li>
+                </ul>
+                
+                <p>Estos algoritmos determinan la magnitud y dirección del ajuste de los parámetros. El proceso completo se repite durante múltiples épocas hasta que la red converge a un conjunto de parámetros que minimizan la función de pérdida.</p>
+            </div>
+
+            <div id="aplicaciones-mlp">
+                <h3>2.4. APLICACIONES Y LIMITACIONES</h3>
+                <p>Los MLP encuentran aplicaciones en numerosos dominios, incluyendo:</p>
+                
+                <ul>
+                    <li>Reconocimiento de patrones</li>
+                    <li>Clasificación de imágenes</li>
+                    <li>Procesamiento de lenguaje natural</li>
+                    <li>Sistemas de recomendación</li>
+                    <li>Predicción de series temporales</li>
+                </ul>
+                
+                <p>Son particularmente efectivos para problemas donde las relaciones entre entradas y salidas son complejas pero no presentan dependencias temporales significativas. Sin embargo, los MLP presentan limitaciones importantes:</p>
+                
+                <ul>
+                    <li><strong>Datos secuenciales:</strong> Carecen de mecanismos para retener información sobre estados anteriores</li>
+                    <li><strong>Estructura espacial/temporal:</strong> No aprovechan las correlaciones locales presentes en este tipo de datos</li>
+                    <li><strong>Sobreajuste (overfitting):</strong> Pueden sufrir de sobreajuste cuando la red es demasiado compleja</li>
+                </ul>
+                
+                <p>Para mitigar el problema del sobreajuste, se emplean técnicas de regularización como:</p>
+                
+                <ul>
+                    <li>Dropout</li>
+                    <li>Weight decay</li>
+                    <li>Early stopping</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="salto-pagina"></div>
+
+        <div class="seccion" id="lstm">
+            <h2>3. REDES NEURONALES LSTM (LONG SHORT-TERM MEMORY)</h2>
+
+            <div id="concepto-lstm">
+                <h3>3.1. CONCEPTO FUNDAMENTAL</h3>
+                <p>Las Redes Neuronales LSTM (Long Short-Term Memory) representan una arquitectura especializada de redes neuronales recurrentes (RNN) diseñada específicamente para superar las limitaciones de las RNN estándar en el aprendizaje de dependencias a largo plazo en datos secuenciales. Desarrolladas originalmente por Sepp Hochreiter y Jürgen Schmidhuber en 1997, las LSTM introducen un mecanismo de memoria persistente que permite a la red retener información durante intervalos de tiempo extensos, resolviendo así el problema del gradiente vanishing que afecta gravemente a las RNN tradicionales cuando intentan aprender relaciones temporales distantes.</p>
+                
+                <p>La innovación fundamental de las LSTM radica en su celda de memoria, que contiene mecanismos gateados que regulan el flujo de información. A diferencia de las RNN estándar, que tienen una estructura simple de tanh que se repite en cada paso de tiempo, las LSTM incorporan puertas (gates) especializadas que deciden qué información debe ser conservada, olvidada o actualizada. Esta capacidad de mantener y acceder selectivamente a información relevante a lo largo de largas secuencias es lo que distingue a las LSTM y las hace particularmente adecuadas para tareas que requieren comprensión de contexto temporal extendido.</p>
+            </div>
+
+            <div id="arquitectura-lstm">
+                <h3>3.2. ARQUITECTURA DETALLADA</h3>
+                <p>La arquitectura de una celda LSTM está compuesta por varios componentes clave que trabajan en conjunto para gestionar el estado de la celda a lo largo del tiempo:</p>
+                
+                <ul>
+                    <li><strong>Estado de la celda (cell state):</strong> Actúa como una "cinta transportadora" de información que fluye a lo largo de toda la secuencia</li>
+                    <li><strong>Puerta de olvido (forget gate):</strong> Determina qué información del estado anterior debe ser descartada</li>
+                    <li><strong>Puerta de entrada (input gate):</strong> Decide qué nueva información será almacenada en el estado de la celda</li>
+                    <li><strong>Puerta de salida (output gate):</strong> Controla qué parte del estado de la celda se utiliza para generar la salida</li>
+                </ul>
+                
+                <p>Matemáticamente, las operaciones se definen como:</p>
+                
+                <div class="formula">
+                    f_t = σ(W_f · [h_(t-1), x_t] + b_f)<br>
+                    i_t = σ(W_i · [h_(t-1), x_t] + b_i)<br>
+                    C ̃_t = tanh(W_C · [h_(t-1), x_t] + b_C)<br>
+                    C_t = f_t * C_(t-1) + i_t * C ̃_t<br>
+                    o_t = σ(W_o · [h_(t-1), x_t] + b_o)<br>
+                    h_t = o_t * tanh(C_t)
+                </div>
+                
+                <p>Esta estructura gateada permite a las LSTM aprender cuándo recordar y cuándo olvidar información, proporcionando un control preciso sobre el flujo de información a través del tiempo y permitiendo que los gradientes fluyan sin atenuarse significativamente durante la retropropagación a través del tiempo (BPTT).</p>
+            </div>
+
+            <div id="aprendizaje-lstm">
+                <h3>3.3. PROCESO DE APRENDIZAJE</h3>
+                <p>El entrenamiento de las redes LSTM se realiza mediante una variante del algoritmo de retropropagación adaptada para arquitecturas recurrentes, conocida como Backpropagation Through Time (BPTT). Este algoritmo desenrolla la red a lo largo del tiempo, tratando cada paso temporal como una capa adicional en una red feedforward profunda, y luego aplica la retropropagación estándar sobre esta red desenrollada.</p>
+                
+                <p>La clave del éxito de las LSTM en el aprendizaje de dependencias a largo plazo reside en que el gradiente que fluye a través del estado de la celda permanece relativamente estable, evitando el problema del gradiente vanishing que afecta a las RNN tradicionales.</p>
+                
+                <p>Durante el proceso de BPTT:</p>
+                
+                <ul>
+                    <li>Los gradientes se calculan con respecto a todos los parámetros de la red en cada paso de tiempo</li>
+                    <li>Las actualizaciones se acumulan a lo largo de la secuencia</li>
+                    <li>Las puertas de las LSTM aprenden a abrirse y cerrarse de manera adaptativa</li>
+                </ul>
+                
+                <p>Este mecanismo de puertas hace que las LSTM sean notablemente robustas para capturar patrones temporales que se extienden sobre cientos o incluso miles de pasos de tiempo, una hazaña que resulta extremadamente difícil para las RNN estándar.</p>
+            </div>
+
+            <div id="aplicaciones-lstm">
+                <h3>3.4. APLICACIONES Y VARIANTES</h3>
+                <p>Las LSTM han demostrado un rendimiento excepcional en una amplia gama de aplicaciones que involucran datos secuenciales:</p>
+                
+                <ul>
+                    <li><strong>Procesamiento del lenguaje natural:</strong> Traducción automática, generación de texto, análisis de sentimientos</li>
+                    <li><strong>Reconocimiento de voz:</strong> Transcripción automática, comandos por voz</li>
+                    <li><strong>Series temporales:</strong> Predicción financiera, monitoreo de equipos industriales</li>
+                    <li><strong>Diagnóstico médico:</strong> Análisis de datos de sensores médicos</li>
+                    <li><strong>Reconocimiento de escritura a mano:</strong> Digitalización de documentos</li>
+                    <li><strong>Composición musical:</strong> Generación de melodías</li>
+                    <li><strong>Control robótico:</strong> Movimientos secuenciales complejos</li>
+                    <li><strong>Sistemas de diálogo:</strong> Chatbots y asistentes virtuales</li>
+                </ul>
+                
+                <p>Existen varias variantes y extensiones de la arquitectura LSTM básica:</p>
+                
+                <ul>
+                    <li><strong>LSTM bidireccionales:</strong> Procesan las secuencias en ambas direcciones</li>
+                    <li><strong>LSTM con atención (attention mechanisms):</strong> Permiten enfocarse selectivamente en partes relevantes</li>
+                    <li><strong>LSTM peephole:</strong> Permiten a las puertas mirar el estado de la celda</li>
+                    <li><strong>GRU (Gated Recurrent Units):</strong> Simplifican la arquitectura LSTM</li>
+                </ul>
+                
+                <p>A pesar de su potencia, las LSTM presentan desafíos computacionales debido a su complejidad y requieren significativamente más recursos computacionales y tiempo de entrenamiento que las arquitecturas feedforward simples. Además, su interpretabilidad es limitada, ya que el funcionamiento interno de las puertas y el estado de la celda puede resultar difícil de analizar y comprender completamente. No obstante, siguen siendo una de las arquitecturas más influyentes y ampliamente utilizadas para el procesamiento de datos secuenciales en el aprendizaje profundo.</p>
+            </div>
+        </div>
+
+    
+    </div>
+</body>
+</html>
